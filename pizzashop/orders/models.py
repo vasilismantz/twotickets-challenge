@@ -27,7 +27,7 @@ class Pizza(models.Model):
         unique_together = ("pizza", "pizza_size")
 
     def __str__(self):
-        return "%s, %s" % (self.pizza_name, self.pizza_size)
+        return "%s, %s" % (self.pizza, self.pizza_size)
 
 
 class Order(models.Model):
