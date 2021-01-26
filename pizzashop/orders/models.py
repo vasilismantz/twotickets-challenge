@@ -18,3 +18,14 @@ class Pizza(models.Model):
 
     def __str__(self):
         return "%s, %s" % (self.pizza_name, self.pizza_size)
+
+
+class Order(models.Model):
+
+    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    customer_name = models.CharField(max_length=200)
+    customer_email = models.CharField(max_length=200)
+    customre_phone = mnodels.CharFiel(max_length=14)
+
+    def __str__(self):
+        return "%s, %s, %s, %s" % (self.pizza, self.customer_name, self.customer_email, self.customre_phone)
