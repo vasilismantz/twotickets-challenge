@@ -25,7 +25,7 @@ class Order(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=200)
     customer_email = models.CharField(max_length=200)
-    customer_phone = models.CharFiel(max_length=14)
+    customer_phone = models.CharField(max_length=14)
 
     def __str__(self):
         return "%s, %s, %s, %s" % (self.pizza, self.customer_name, self.customer_email, self.customer_phone)
