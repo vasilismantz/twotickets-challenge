@@ -2,6 +2,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class PizzaType(models.Model):
+    pizza_type = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.pizza_type
+
+
 class Pizza(models.Model):
 
     class PizzaSize(models.TextChoices):
@@ -9,7 +16,7 @@ class Pizza(models.Model):
         MEDIUM = 'M', _('Medium')
         LARGE = 'L', _('Large')
 
-    pizza_name = models.CharField(max_length=200)
+    pizza = models.ForeignKey(PizzaType, on_delete=models.CASCADE)
     pizza_size = models.CharField(
         max_length=1,
         choices=PizzaSize.choices,
