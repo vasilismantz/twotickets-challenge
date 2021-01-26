@@ -23,6 +23,9 @@ class Pizza(models.Model):
         default=PizzaSize.MEDIUM,
     )
 
+    class Meta:
+        unique_together = ("pizza", "pizza_size")
+
     def __str__(self):
         return "%s, %s" % (self.pizza_name, self.pizza_size)
 
