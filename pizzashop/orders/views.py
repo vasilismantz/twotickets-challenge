@@ -1,3 +1,12 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Pizza, PizzaType, Order
+
+# Get pizzas and dislay them
+
+
+def index(request):
+    pizzas = PizzaType.objects.all()
+    context = {'pizzas': pizzas}
+    return render(request, "orders/index.html", context)
+
