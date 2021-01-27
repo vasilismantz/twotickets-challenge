@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <h1 class="text-center mb-3">Pizza Shop</h1>
+    <h4 class="text-center mb-3">Please order here</h4>
+    {% if pizzas %} 
+        {% for pizza in pizzas %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <form action="/complete_form" method="post">
+                            {% csrf_token %}
+                            <div class="d-flex justify-content-between ">
+                                <input type="hidden" name="pizza_id" value={{pizza.id}} />
+                                <div class="pizza_name" style="width: 40%; align-items: center;">
+                                    <span class="lead p-2">{{ pizza.pizza_type }}</span>
+                                    <input type="hidden" name="pizza_name" value={{pizza.pizza_type}} />
+                                </div>
+                                <select name="pizza_size" required>
+                                {% for size in pizza.sizes %}
+                                    <option value={{size.pizza_size}}>{{size.pizza_size}}</option>
+                                {% endfor %}
+                                </select>
+                                <button type="buton" class="btn btn-primary">Choose</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %} 
+        <p class="text-center">Go to <a href="/orders">Orders</a></p>
+    {% else %}
+    <p>No orders available</p>
+    {% endif %} 
+    <script>
+
+    </script>
+{% endblock %}

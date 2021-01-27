@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <h1 class="text-center mb-3">Pizza Shop</h1>
+    <h4 class="text-center mb-3">Please enter your details</h4>
+    {% if result %} 
+        <div class="card mb-3">
+            <div class="card-body text-center">
+                <p>Order was placed!</p>
+                <p>View it here</p>
+                <p>Go back to <a href="/orders">Home</a></p>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-center">Order wasn't placed. Please try again...</p>
+        <p class="text-center">Go back to <a href="/">Home</a></p>
+    {% endif %}
+{% endblock %}

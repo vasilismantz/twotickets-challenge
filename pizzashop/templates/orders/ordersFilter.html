@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <h1 class="text-center mb-3">Pizza Shop</h1>
+    <h4 class="text-center mb-3">Order</h4>
+
+    {% if orders %}
+        {% for order in orders %} 
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                            <span class="col">Pizza: </span>
+                            <span class="col">{{order.pizza.pizza.pizza_type}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Size: </span>
+                        <span class="col">{{order.pizza.pizza_size}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer name: </span>
+                        <span class="col">{{order.customer_name}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer email: </span>
+                        <span class="col">{{order.customer_email}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer phone: </span>
+                        <span class="col">{{order.customer_phone}}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <p class="text-center">Go back to <a href="/orders">Orders</a></p>
+        <p class="text-center">Go to <a href="/">Home</a> page</p>
+    {% else %}
+    <p class="text-center">No orders available with this parameters</p>
+    <p class="text-center">Go back to <a href="/orders">Orders</a></p>
+    <p class="text-center">Go to <a href="/">Home</a></p>
+
+    {% endif %} 
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %} 
+{% block content %}
+    <h1 class="text-center mb-3">Pizza Shop</h1>
+    <h4 class="text-center mb-3">Orders</h4>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form action="/orders/ordersFilter" method="post">
+                {% csrf_token %}
+                <div>
+                    <div class="form-group row mb-3">
+                        <label for="name" class="col-sm-2 col-form-label">Search: </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" placeholder="Search text..." name="search" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">Search by: </label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="field" required>
+                                <option value="name">Name</option>
+                                <option value="email">Email</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="buton" class="btn btn-primary">Filter</button>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+
+    {% if orders %} 
+        {% for order in orders %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                            <span class="col">Pizza: </span>
+                            <span class="col">{{order.pizza.pizza.pizza_type}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Size: </span>
+                        <span class="col">{{order.pizza.pizza_size}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer name: </span>
+                        <span class="col">{{order.customer_name}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer email: </span>
+                        <span class="col">{{order.customer_email}}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">Customer phone: </span>
+                        <span class="col">{{order.customer_phone}}</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <p class="text-center">Go to <a href="/">Home</a> page</p>
+    {% else %}
+    <p class="text-center">No orders available</p>
+    <p class="text-center">Go to <a href="/">Home</a> page</p>
+    {% endif %} 
+{% endblock %}
