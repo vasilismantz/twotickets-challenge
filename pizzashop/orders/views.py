@@ -12,28 +12,35 @@ def index(request):
     pizzas = PizzaType.objects.all()
 
     for pizza in pizzas:
-        pizza.sizes = Pizza.objects.filter(pizza__pizza_type=pizza).values('pizza_size')
+        pizza.sizes = Pizza.objects.filter(
+            pizza__pizza_type=pizza).values('pizza_size')
 
     context = {'pizzas': pizzas}
     return render(request, "index.html", context)
+
 
 def completeForm(request):
     if request.method == "POST":
         pizza = request.POST["pizza_name"]
         size = request.POST["pizza_size"]
 
-        pizzaInstance = Pizza.objects.filter(pizza__pizza_type=pizza, pizza_size=size).values_list("id", flat=True)
+        pizzaInstance = Pizza.objects.filter(
+            pizza__pizza_type=pizza, pizza_size=size).values_list("id", flat=True)
 
         for p in pizzaInstance:
             id = p
 
         context = {
             "pizza": pizza,
-            "size" : size,
-            "id" : id
+            "size": size,
+            "id": id
         }
 
         return render(request, "completeForm.html", context)
+
+    if request.method == "GET":
+        return render(request, "error.html")
+
 
 def result(request):
     if request.method == "POST":
@@ -42,16 +49,20 @@ def result(request):
         email = request.POST["email"]
         phone = request.POST["phone"]
 
-
         pizza = Pizza.objects.get(pk=id)
 
-        pizza.order_set.create(customer_name=name, customer_email=email, customer_phone=phone)
+        pizza.order_set.create(
+            customer_name=name, customer_email=email, customer_phone=phone)
 
         context = {
             "result": "success"
         }
 
         return render(request, "result.html", context)
+
+    if request.method == "GET":
+        return render(request, "error.html")
+
 
 def ordersIndex(request):
     orders = Order.objects.all()
@@ -61,6 +72,7 @@ def ordersIndex(request):
     }
 
     return render(request, "orders/ordersIndex.html", context)
+
 
 def ordersFilter(request):
     if request.method == "POST":
@@ -77,3 +89,6 @@ def ordersFilter(request):
         }
 
         return render(request, "orders/ordersFilter.html", context)
+
+    if request.method == "GET":
+        return render(request, "error.html")
