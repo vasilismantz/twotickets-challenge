@@ -13,14 +13,9 @@ def index(request):
 
     for pizza in pizzas:
         pizza.sizes = Pizza.objects.filter(pizza__pizza_type=pizza).values('pizza_size')
-        logger.info(pizza.id)
-        logger.info(pizza)
-        logger.info(pizza.sizes)
-
-    logger.info(pizzas)
 
     context = {'pizzas': pizzas}
-    return render(request, "orders/index.html", context)
+    return render(request, "index.html", context)
 
 def completeForm(request):
     if request.method == "POST":
@@ -38,7 +33,7 @@ def completeForm(request):
             "id" : id
         }
 
-        return render(request, "orders/completeForm.html", context)
+        return render(request, "completeForm.html", context)
 
 def result(request):
     if request.method == "POST":
@@ -56,4 +51,29 @@ def result(request):
             "result": "success"
         }
 
-        return render(request, "orders/result.html", context)
+        return render(request, "result.html", context)
+
+def ordersIndex(request):
+    orders = Order.objects.all()
+
+    context = {
+        "orders": orders
+    }
+
+    return render(request, "orders/ordersIndex.html", context)
+
+def ordersFilter(request):
+    if request.method == "POST":
+        search = request.POST["search"]
+        field = request.POST["field"]
+
+        if field == "name":
+            orders = Order.objects.filter(customer_name=search)
+        elif field == "email":
+            orders = Order.objects.filter(customer_email=search)
+
+        context = {
+            "orders": orders
+        }
+
+        return render(request, "orders/ordersFilter.html", context)
