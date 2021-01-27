@@ -27,7 +27,7 @@ class Pizza(models.Model):
         unique_together = ("pizza", "pizza_size")
 
     def __str__(self):
-        return "%s, %s" % (self.pizza, self.pizza_size)
+        return "%s, %s, %s" % (self.id, self.pizza, self.pizza_size)
 
 
 class Order(models.Model):
@@ -38,4 +38,4 @@ class Order(models.Model):
     customer_phone = models.CharField(max_length=14)
 
     def __str__(self):
-        return "%s, %s, %s, %s" % (self.pizza, self.customer_name, self.customer_email, self.customer_phone)
+        return "%s, %s, %s, %s, %s" % (self.id, self.pizza, self.customer_name, self.customer_email, self.customer_phone)
