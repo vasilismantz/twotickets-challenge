@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from orders import views
+
 urlpatterns = [
     path('orders/', include('orders.urls')),
     path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('complete_form', views.completeForm, name="complete-form"),
+    path('result', views.result, name="result")
 ]
