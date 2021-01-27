@@ -4,7 +4,6 @@ from . import views
 
 app_name = "orders"
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('complete_form', views.completeForm, name="complete-form"),
-    path('result', views.result, name="result")
+    path('', views.ordersIndex, name='index'),
+    path('ordersFilter', views.ordersFilter, name="ordersFilter")
 ]
